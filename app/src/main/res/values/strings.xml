@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">ReadDirectlyApp</string>
-    <string-array name = "langs">
+    <string-array name="langs">
         <item>한국어</item>
         <item>일본어</item>
         <item>영어</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

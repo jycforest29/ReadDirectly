@@ -1,8 +1,8 @@
-package com.example.readdirectlyapp.model;
+package com.example.readdirectlyapp.model.api;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Chunk {
+public class Sentence {
     @SerializedName("before")
     private String before;
     @SerializedName("after")
@@ -10,10 +10,8 @@ public class Chunk {
     @SerializedName("pronunciation")
     private String pronunciation;
 
-    public Chunk(String before, String after, String pronunciation) {
+    public Sentence(String before) {
         this.before = before;
-        this.after = after;
-        this.pronunciation = pronunciation;
     }
 
     public String getBefore() {

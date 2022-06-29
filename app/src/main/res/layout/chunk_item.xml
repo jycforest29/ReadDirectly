@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="11dp">
+    android:backgroundTint="#8F5A5A"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/before"
-        android:layout_width="45dp"
+        android:id="@+id/c_before"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/c_after"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <TextView
-        android:id="@+id/after"
-        android:layout_width="45dp"
+        android:id="@+id/c_pronc"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <TextView
-        android:id="@+id/pronunciation"
-        android:layout_width="45dp"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/insertBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-11dp"
         android:layout_weight="1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:background="#FFFFFF"
+        app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+
 </LinearLayout>

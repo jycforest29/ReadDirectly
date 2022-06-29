@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_select"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="menu1" />
+    <item
+        android:id="@+id/menu_like"
+        android:icon="@android:drawable/btn_star"
+        android:title="menu2" />
+    <item
+        android:id="@+id/menu_setting"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="menu3" />
+</menu>
