@@ -7,59 +7,56 @@ from main.models import Sentence, Chunk
 
 # Create your views here.
 
-def translate(sentence, dest):
+def translate(before, dest):
     from googletrans import Translator
 
     # variables
     translator = Translator() 
-    inputSplit = sentence.input.split(' ')
+    sentenceSplit = before.split(' ')
 
-    whole = translator.translate(sentence.input, dest = dest)
-    Chunk.objects.create(sentence = sentence, before = sentence.input, after = whole.text, pronunciation = whole.pronunciation)
+    sentenceResult = translator.translate(before, dest = dest)
+    sentence = Sentence.objects.create(dest = dest, before = before, after = sentenceResult.text,pronunciation = sentenceResult.pronunciation)
 
-    if len(inputSplit) != 1:
-        # textSplit단위로 translate
-        for i in inputSplit:
-            result = translator.translate(i, dest = dest)
-            Chunk.objects.create(sentence = sentence, before = i, after = result.text,pronunciation = result.pronunciation)
+    for i in sentenceSplit:
+        chunkResult = translator.translate(i, dest = dest)
+        Chunk.objects.create(sentence = sentence, before = i, after = chunkResult.text,pronunciation = chunkResult.pronunciation)
+    return sentence
 
 
-class sentenceApiView(APIView):
+# 단어 여러개
+class chunkApiView(APIView):
 
-    # 텍스트 입력받음 안녕하세요
     def post(self, request, dest):
         serializer = SentenceSerializer(data = request.data)
-        
-        if serializer.is_valid():
-            serializer.save()
-            sentence = Sentence.objects.filter(input = request.data.get('input'))[0]
 
-            translate(sentence, dest)
+        if serializer.is_valid():
+            # serializer.save()
+            before = request.data.get('before')
+            try:
+                sentence = Sentence.objects.get(before = before, dest = dest)
+            except Sentence.DoesNotExist:
+                sentence = translate(before, dest)
             chunks = Chunk.objects.filter(sentence = sentence)
-            serializer = ChunkSerializer(chunks, many = True)
-            return Response(serializer.data)
+            chunkSerializer = ChunkSerializer(chunks, many = True)
+            # res = [[(k, v) for k, v in sentenceSerializer.data.items()], chunkSerializer.data]
+            return Response(chunkSerializer.data)
         return Response(serializer.errors, status = StatusCode.BAD_REQUEST)
 
-# class fileApiView(APIView):
-    
-#     def get(self, file, dest):
-#         result = []
-#         # 파일 업로드
-#         with open(file, 'r', encoding = "utf-8") as f:
-#             lines = f.read().splitlines()
-#             for i in range(len(lines)):
-#                 translate(lines[i], dest)
-#                 chunks = Chunk.objects.filter(sentence = lines[i])
-#                 result.append(ChunkSerializer(chunks, many = True))
-#         return Response(result)
-    
-#     # 파일 입력받음
-#     def post(self, request, dest):
-#         serializer = FileSerializer(data = request.data)
-#         if serializer.is_valid():
-#             if File.objects.get(file = serializer.data):
-#                 pass
-#             else:
-#                 serializer.save()
-#             self.get(serializer.data, dest)
-#         return Response(serializer.errors, status = StatusCode.BAD_REQUEST)
+# 문장 1개
+class sentenceApiView(APIView):
+
+    def post(self, request, dest):
+        serializer = SentenceSerializer(data = request.data)
+
+        if serializer.is_valid():
+            # serializer.save()
+            before = request.data.get('before')
+            try:
+                sentence = Sentence.objects.get(before = before, dest = dest)
+            except Sentence.DoesNotExist:
+                return Response(serializer.errors, status = StatusCode.BAD_REQUEST)
+
+            sentenceSerializer = SentenceSerializer(sentence, many = False)
+            return Response(sentenceSerializer.data)
+        return Response(serializer.errors, status = StatusCode.BAD_REQUEST)
+
