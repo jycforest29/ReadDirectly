@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from .mySettings import SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_7zityjw%8_(1mljonwg(n3gzt&rt55_^v3x)p8=z1n@_fa*&l'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #django-custom
     'rest_framework',
+    'knox',
     #custom
     'main',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +107,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASS':(
+#         'knox.auth.tokenAuthentication'
+#     ),
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
