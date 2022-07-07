@@ -11,6 +11,12 @@ DB: 서버-sqlite3, 클라이언트-room<br>
 # 사용한 오픈소스
 googletrans open api
 # 프로젝트 스샷 및 설명
+![spinner](https://user-images.githubusercontent.com/103106183/177677462-795e8258-929d-4775-9e7d-12359699de3f.png)
+![translate](https://user-images.githubusercontent.com/103106183/177677487-3d09480f-9968-408a-89af-871a4019090d.png)
+![insert](https://user-images.githubusercontent.com/103106183/177677498-1adfbcb5-b162-4511-a85e-9cc116f1b76b.png)
+![likeChunk](https://user-images.githubusercontent.com/103106183/177677509-e39c0823-a116-42a9-8145-bc0bbe952780.png)
+![delete](https://user-images.githubusercontent.com/103106183/177677528-113afb25-aea1-4b55-9112-fb7ce44a0ab1.png)
+
 # 보완점
 현재 회원가입 관련 토큰에서 막힘...<br>
 +파일 분석<br>
